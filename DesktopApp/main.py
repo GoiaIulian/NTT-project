@@ -50,7 +50,7 @@ def main():
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
         c.draw_cube()
-        # draw_text((10, 10, 10), s)
+        # draw_text((2, 2, 2), s)
         pygame.display.flip()
         pygame.time.wait(10)
 

@@ -1,21 +1,9 @@
-07:55:44 **** Incremental Build of configuration Debug for project Trial ****
+10:07:58 **** Incremental Build of configuration Debug for project Trial ****
 make all 
 Building file: ../Src/main.c
 Invoking: MCU GCC Compiler
 D:\Workspace\Trial\Debug
 arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
-../Src/main.c: In function 'Init__vMPU_6050':
-../Src/main.c:256:3: warning: implicit declaration of function '_delay_ms' [-Wimplicit-function-declaration]
-   _delay_ms(1000);
-   ^~~~~~~~~
-../Src/main.c: In function 'WHO_AM_I_vTest':
-../Src/main.c:334:2: warning: implicit declaration of function 'Flush_Buffer'; did you mean 'setbuffer'? [-Wimplicit-function-declaration]
-  Flush_Buffer((uint8_t*)aRxBuffer,RXBUFFERSIZE);
-  ^~~~~~~~~~~~
-  setbuffer
-../Src/main.c:331:2: warning: 'regV' is used uninitialized in this function [-Wuninitialized]
-  printf("\n\r My chip address is = %d \n\r",regV);
-  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Finished building: ../Src/main.c
  
 Building target: Trial.elf
@@ -28,8 +16,5 @@ Generating hex and Printing size information:
 arm-none-eabi-objcopy -O ihex "Trial.elf" "Trial.hex"
 arm-none-eabi-size "Trial.elf"
    text	   data	    bss	    dec	    hex	filename
-  21712	    484	   1780	  23976	   5da8	Trial.elf
+  21872	    484	   1780	  24136	   5e48	Trial.elf
  
-07:55:48 **** Incremental Build of configuration Debug for project Trial ****
-make all 
-make: Nothing to be done for 'all'.

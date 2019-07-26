@@ -42,17 +42,29 @@
 #include "main.h"
 #include "iicb_interface_ci.h"
 #include "iicb_interface.h"
+#include "mpu6050.h"
+
+typedef struct ImuData {
+	float AccXData;
+	float AccYData;
+	float AccZData;
+	float Temp;
+	float GyroXData;
+	float GyroYData;
+	float GyroZData;
+	float MagXData;
+	float MagYData;
+	float MagZData;
+}IMU_tstImuData;
 
 #define I2C_ADDRESS        0x68F
 #define I2Cx                             I2C1
 
 
-#define mpu_6050_adress 0x68 // 0b1101000
+
 #define mpu_6050_sig_path_rst 104
 
-#define init_byte_107 0b00001000
-#define init_byte_106 0b00000001
-#define init_byte_104 0b00000111
+
 
 #define mpu_6050_pwr_mgmnt_1 107 //0x6B
 #define mpu_6050_smprt_div 25
@@ -107,6 +119,10 @@ static void MX_GPIO_Init(void);
 static void MX_USART6_UART_Init(void);
 void debug(void);
 void testChip(void);
+void Init__vMPU_6050();
+
+
+IMU_tstImuData get_DATA();
 
 
 /* USER CODE BEGIN PFP */
@@ -151,19 +167,21 @@ int main(void)
 
 
   Config_I2C_Peripheral();
+  Init__vMPU_6050();
 
   testChip();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
-
+  IMU_tstImuData v;
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
-	  debug();
-
+//	  debug();
+	  v = get_DATA();
+	  printf("\r\n%f", v.AccXData);
 	  //HAL_UART_Transmit(&huart6, (uint8_t *)&buff, 10, 0xFFFF);
     /* USER CODE BEGIN 3 */
   }
@@ -215,6 +233,60 @@ void SystemClock_Config(void)
   }
 }
 
+void I2C__vWriteSingleByteBuffer(uint8_t I2c_add, uint8_t regAdress, uint8_t regValue)
+{
+	uint8_t aTxBuffer[2];
+
+	aTxBuffer[0] = regAdress;
+	aTxBuffer[1] = regValue;
+
+    /* -> Start the transmission process */
+    /* While the I2C in reception process, user can transmit data through "aTxBuffer" buffer */
+    while(HAL_I2C_Master_Transmit(&I2cHandle, (uint16_t)(I2c_add<<1),aTxBuffer, (uint16_t)2, (uint32_t)1000)!= HAL_OK)
+    {
+        /*
+         * Error_Handler() function is called when Timeout error occurs.
+         * When Acknowledge failure occurs (Slave don't acknowledge it's address)
+         * Master restarts communication
+         */
+
+        if (HAL_I2C_GetError(&I2cHandle) != HAL_I2C_ERROR_AF)
+        {
+            Error_Handler();
+        }
+
+    }
+
+    /* -> Wait for the end of the transfer */
+    /* Before starting a new communication transfer, you need to check the current
+     * state of the peripheral; if it’s busy you need to wait for the end of current
+     * transfer before starting a new one.
+     * For simplicity reasons, this example is just waiting till the end of the
+     * transfer, but application may perform other tasks while transfer operation
+     * is ongoing.
+     */
+      while (HAL_I2C_GetState(&I2cHandle) != HAL_I2C_STATE_READY)
+      {
+      }
+}
+
+/**
+  * @brief  Compares two buffers.
+  * @param  pBuffer1, pBuffer2: buffers to be compared.
+  * @param  BufferLength: buffer's length
+  * @retval 0  : pBuffer1 identical to pBuffer2
+  *         >0 : pBuffer1 differs from pBuffer2
+  */
+
+void _delay_ms(int time)
+{
+	volatile int i,j;
+
+	for(i=0;i<time;i++)
+	{
+		j++;
+	}
+}
 
 void Init__vMPU_6050()
 {
@@ -312,27 +384,7 @@ void Init__vMPU_6050()
 	return ;
 }
 
-void WHO_AM_I_vTest()
-{
-	/* Initialize number of data variables */
-	static uint8_t registerContent;
-	uint8_t regV;
 
-	/*Step 1 - Transmit the adress and the register adress that shall be read*/
-	/* Update bTransferRequest to send buffer write request for Slave */
-
-	I2C__vReadBuffer(0x68,117,(uint8_t*)&registerContent,1);
-
-	//Com_Write_ComLayer_IMUData(registerContent);
-
-	//Com_Read_ComLayer_IMUData(&regV);
-
-	printf("\n\r Who are you ? \n\r");
-	printf("\n\r My chip address is = %d \n\r",regV);
-
-	/* Flush Rx buffers */
-	Flush_Buffer((uint8_t*)aRxBuffer,RXBUFFERSIZE);
-}
 
 
 
@@ -506,6 +558,45 @@ void testChip(void)
 	{
 		printf("\r\n---nWho am I...[ NOK ]---");
 	}
+}
+
+IMU_tstImuData get_DATA(){
+
+
+	uint8_t AccelGyroRawData[14] = {0};
+	int16_t int16FinalImuRawData[10]={0};
+	IMU_tstImuData IMUstRawData;
+	I2C__vReadBuffer(mpu_6050_adress,mpu_6050_accel_x_h,AccelGyroRawData,14);
+
+		int16FinalImuRawData[0] = (AccelGyroRawData[0]<<8)|(AccelGyroRawData[1]); //acc_x
+		int16FinalImuRawData[1] = (AccelGyroRawData[2]<<8)|(AccelGyroRawData[3]); //acc_y
+		int16FinalImuRawData[2] = (AccelGyroRawData[4]<<8)|(AccelGyroRawData[5]); //acc_z
+		int16FinalImuRawData[3] = (AccelGyroRawData[6]<<8)|(AccelGyroRawData[7]); //temperature
+		int16FinalImuRawData[4] = (AccelGyroRawData[8]<<8)|(AccelGyroRawData[9]); //gyro_x
+		int16FinalImuRawData[5] = (AccelGyroRawData[10]<<8)|(AccelGyroRawData[11]); //gyro_y
+		int16FinalImuRawData[6] = (AccelGyroRawData[12]<<8)|(AccelGyroRawData[13]); //gyro_z
+
+
+
+
+
+
+
+		    IMUstRawData.AccXData  = (float)int16FinalImuRawData[0];
+			IMUstRawData.AccYData  = (float)int16FinalImuRawData[1];
+			IMUstRawData.AccZData  = (float)int16FinalImuRawData[2];
+			IMUstRawData.Temp      = (float)int16FinalImuRawData[3];
+			IMUstRawData.GyroXData = (float)int16FinalImuRawData[4];
+			IMUstRawData.GyroYData = (float)int16FinalImuRawData[5];
+			IMUstRawData.GyroZData = (float)int16FinalImuRawData[6];
+			IMUstRawData.MagXData  = (float)int16FinalImuRawData[7];
+			IMUstRawData.MagYData  = (float)int16FinalImuRawData[8];
+			IMUstRawData.MagZData  = (float)int16FinalImuRawData[9];
+
+
+
+	return IMUstRawData;
+
 }
 
 
