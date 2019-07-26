@@ -1,23 +1,6 @@
-10:07:58 **** Incremental Build of configuration Debug for project Trial ****
+12:00:42 **** Incremental Build of configuration Debug for project Trial ****
 make all 
-Building file: ../Src/main.c
-Invoking: MCU GCC Compiler
-D:\Workspace\Trial\Debug
-arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
-Finished building: ../Src/main.c
- 
-Building target: Trial.elf
-Invoking: MCU GCC Linker
-arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -specs=nosys.specs -specs=nano.specs -u_printf_float -T"../STM32F769NIHx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "Trial.elf" @"objects.list"   -lm
-Finished building target: Trial.elf
- 
-make --no-print-directory post-build
-Generating hex and Printing size information:
-arm-none-eabi-objcopy -O ihex "Trial.elf" "Trial.hex"
-arm-none-eabi-size "Trial.elf"
-   text	   data	    bss	    dec	    hex	filename
-  21872	    484	   1780	  24136	   5e48	Trial.elf
- 
+make: Nothing to be done for 'all'.
 
-10:08:00 Build Finished (took 2s.212ms)
+12:00:42 Build Finished (took 272ms)
 

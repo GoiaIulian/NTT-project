@@ -1,7 +1,6 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=org.eclipse.launchbar.core.descriptorType.default\:Orientation Debug,org.eclipse.launchbar.core.descriptorType.default\:Trial Run
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:Trial Run
 eclipse.preferences.version=1
-org.eclipse.launchbar.core.descriptorType.default\:Orientation\ Debug/activeLaunchMode=run
-org.eclipse.launchbar.core.descriptorType.default\:Orientation\ Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
 org.eclipse.launchbar.core.descriptorType.default\:Trial\ Run/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:Trial\ Run/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local

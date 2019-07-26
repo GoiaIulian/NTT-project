@@ -41,6 +41,7 @@ def main():
         line = line.rstrip(b'\r\n')
         elements = line.decode("utf-8").split(';')
         s = ""
+        
         if 3 < elements.__len__() < 5:
             q = Quaternion(elements[0], elements[1], elements[2], elements[3])
             glMultMatrixf(q.transformation_matrix)

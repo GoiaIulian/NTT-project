@@ -1,4 +1,4 @@
-!SESSION 2019-07-18 11:54:04.264 -----------------------------------------------
+!SESSION 2019-07-26 10:41:33.351 -----------------------------------------------
 eclipse.buildId=4.6.3.M20170301-0400
 java.version=1.8.0_151
 java.vendor=Oracle Corporation
@@ -6,336 +6,40 @@ BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
 Framework arguments:  -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
 
-!ENTRY org.eclipse.egit.ui 2 0 2019-07-18 11:56:36.306
+!ENTRY org.eclipse.egit.ui 2 0 2019-07-26 10:41:51.482
 !MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
 user global configuration and to define the default location to store repositories: 'C:\Users\yulia'. If this is
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
 
-!ENTRY fr.ac6.mcu.ide 1 1 2019-07-18 11:56:39.117
-!MESSAGE Started RMI Server, listening on port 21112
-!SESSION 2019-07-18 11:00:49.582 -----------------------------------------------
-eclipse.buildId=4.6.3.M20170301-0400
-java.version=1.8.0_151
-java.vendor=Oracle Corporation
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
-Framework arguments:  -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product file:/D:/Workspace/Orientation/.cproject
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product file:/D:/Workspace/Orientation/.cproject
-
-!ENTRY org.eclipse.egit.ui 2 0 2019-07-18 11:02:04.490
-!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
-user global configuration and to define the default location to store repositories: 'C:\Users\yulia'. If this is
-not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
-EGit might behave differently since they see different configuration options.
-This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
-
-!ENTRY fr.ac6.mcu.ide 1 1 2019-07-18 11:02:05.894
+!ENTRY fr.ac6.mcu.ide 1 1 2019-07-26 10:41:54.091
 !MESSAGE Started RMI Server, listening on port 21112
 
-!ENTRY org.eclipse.cdt.core 1 0 2019-07-18 11:02:20.785
-!MESSAGE Indexed 'Orientation' (19 sources, 85 headers) in 13 sec: 8,857 declarations; 31,644 references; 0 unresolved inclusions; 75 syntax errors; 54 unresolved names (0.13%)
-
-!ENTRY org.eclipse.launchbar.core 2 0 2019-07-18 11:03:47.570
-!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
-
-!ENTRY org.eclipse.launchbar.core 2 0 2019-07-18 11:03:47.579
-!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
-
-!ENTRY org.eclipse.cdt.dsf 4 10005 2019-07-18 11:18:14.636
-!MESSAGE Breakpoint already removed
-!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10005 2019-07-18 11:18:14.636
-!MESSAGE Breakpoint already removed
-
-!ENTRY org.eclipse.cdt.dsf 4 -1 2019-07-18 11:18:14.771
-!MESSAGE Uncaught exception in DSF executor thread
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 17 2019-07-26 10:42:10.649
+!MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: Read timed out. ; version: 2.0.4.v20170307-1435
 !STACK 0
-java.lang.NullPointerException
-	at org.eclipse.cdt.dsf.service.AbstractDsfService.register(AbstractDsfService.java:202)
-	at org.eclipse.cdt.dsf.gdb.service.GDBBackend.doRegisterStep(GDBBackend.java:719)
-	at org.eclipse.cdt.dsf.gdb.service.GDBBackend$RegisterStep.initialize(GDBBackend.java:484)
-	at org.eclipse.cdt.dsf.gdb.service.command.GDBControl$InitializationShutdownStep.execute(GDBControl.java:492)
-	at org.eclipse.cdt.dsf.concurrent.Sequence.executeStep(Sequence.java:459)
-	at org.eclipse.cdt.dsf.concurrent.Sequence.access$2(Sequence.java:373)
-	at org.eclipse.cdt.dsf.concurrent.Sequence$2.handleSuccess(Sequence.java:420)
-	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleCompleted(RequestMonitor.java:385)
-	at org.eclipse.cdt.dsf.concurrent.RequestMonitor$2.run(RequestMonitor.java:312)
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-
-!ENTRY org.eclipse.cdt.dsf 4 10005 2019-07-18 11:18:14.830
-!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.concurrent.RequestMonitorWithProgress@2da94d64): Status ERROR: org.eclipse.cdt.dsf code=0 Unhandled exception when executing Sequence org.eclipse.cdt.dsf.gdb.service.GDBBackend$2@74ed189f, step #2 java.lang.NullPointerException' resulted in an error.
-!SUBENTRY 1 org.eclipse.cdt.dsf 4 0 2019-07-18 11:18:14.831
-!MESSAGE Unhandled exception when executing Sequence org.eclipse.cdt.dsf.gdb.service.GDBBackend$2@74ed189f, step #2
-!STACK 0
-java.lang.NullPointerException
-	at org.eclipse.cdt.dsf.service.AbstractDsfService.register(AbstractDsfService.java:202)
-	at org.eclipse.cdt.dsf.gdb.service.GDBBackend.doRegisterStep(GDBBackend.java:719)
-	at org.eclipse.cdt.dsf.gdb.service.GDBBackend$RegisterStep.initialize(GDBBackend.java:484)
-	at org.eclipse.cdt.dsf.gdb.service.command.GDBControl$InitializationShutdownStep.execute(GDBControl.java:492)
-	at org.eclipse.cdt.dsf.concurrent.Sequence.executeStep(Sequence.java:459)
-	at org.eclipse.cdt.dsf.concurrent.Sequence.access$2(Sequence.java:373)
-	at org.eclipse.cdt.dsf.concurrent.Sequence$2.handleSuccess(Sequence.java:420)
-	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleCompleted(RequestMonitor.java:385)
-	at org.eclipse.cdt.dsf.concurrent.RequestMonitor$2.run(RequestMonitor.java:312)
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-
-!ENTRY fr.ac6.mcu.debug 4 5012 2019-07-18 11:18:14.856
-!MESSAGE Error in services launch sequence
-!STACK 1
-org.eclipse.core.runtime.CoreException: Unhandled exception when executing Sequence org.eclipse.cdt.dsf.gdb.service.GDBBackend$2@74ed189f, step #2
-	at org.eclipse.cdt.dsf.concurrent.Sequence.abortExecution(Sequence.java:582)
-	at org.eclipse.cdt.dsf.concurrent.Sequence.access$4(Sequence.java:574)
-	at org.eclipse.cdt.dsf.concurrent.Sequence$2.handleErrorOrWarning(Sequence.java:431)
-	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleFailure(RequestMonitor.java:424)
-	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleCompleted(RequestMonitor.java:387)
-	at org.eclipse.cdt.dsf.concurrent.RequestMonitor$2.run(RequestMonitor.java:312)
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.lang.NullPointerException
-	at org.eclipse.cdt.dsf.service.AbstractDsfService.register(AbstractDsfService.java:202)
-	at org.eclipse.cdt.dsf.gdb.service.GDBBackend.doRegisterStep(GDBBackend.java:719)
-	at org.eclipse.cdt.dsf.gdb.service.GDBBackend$RegisterStep.initialize(GDBBackend.java:484)
-	at org.eclipse.cdt.dsf.gdb.service.command.GDBControl$InitializationShutdownStep.execute(GDBControl.java:492)
-	at org.eclipse.cdt.dsf.concurrent.Sequence.executeStep(Sequence.java:459)
-	at org.eclipse.cdt.dsf.concurrent.Sequence.access$2(Sequence.java:373)
-	at org.eclipse.cdt.dsf.concurrent.Sequence$2.handleSuccess(Sequence.java:420)
-	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleCompleted(RequestMonitor.java:385)
-	... 8 more
-!SUBENTRY 1 org.eclipse.cdt.dsf 4 0 2019-07-18 11:18:14.860
-!MESSAGE Unhandled exception when executing Sequence org.eclipse.cdt.dsf.gdb.service.GDBBackend$2@74ed189f, step #2
-!STACK 0
-java.lang.NullPointerException
-	at org.eclipse.cdt.dsf.service.AbstractDsfService.register(AbstractDsfService.java:202)
-	at org.eclipse.cdt.dsf.gdb.service.GDBBackend.doRegisterStep(GDBBackend.java:719)
-	at org.eclipse.cdt.dsf.gdb.service.GDBBackend$RegisterStep.initialize(GDBBackend.java:484)
-	at org.eclipse.cdt.dsf.gdb.service.command.GDBControl$InitializationShutdownStep.execute(GDBControl.java:492)
-	at org.eclipse.cdt.dsf.concurrent.Sequence.executeStep(Sequence.java:459)
-	at org.eclipse.cdt.dsf.concurrent.Sequence.access$2(Sequence.java:373)
-	at org.eclipse.cdt.dsf.concurrent.Sequence$2.handleSuccess(Sequence.java:420)
-	at org.eclipse.cdt.dsf.concurrent.RequestMonitor.handleCompleted(RequestMonitor.java:385)
-	at org.eclipse.cdt.dsf.concurrent.RequestMonitor$2.run(RequestMonitor.java:312)
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$201(ScheduledThreadPoolExecutor.java:180)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:293)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-
-!ENTRY org.eclipse.core.jobs 2 2 2019-07-18 11:18:15.330
-!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.cdt.dsf.gdb.internal.ui.console.GdbBasicCliConsole$InputReadJob
-!SESSION 2019-07-18 11:18:18.187 -----------------------------------------------
-eclipse.buildId=4.6.3.M20170301-0400
-java.version=1.8.0_151
-java.vendor=Oracle Corporation
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
-Framework arguments:  -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
-
-!ENTRY org.eclipse.egit.ui 2 0 2019-07-18 11:18:35.922
-!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
-user global configuration and to define the default location to store repositories: 'C:\Users\yulia'. If this is
-not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
-EGit might behave differently since they see different configuration options.
-This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
-
-!ENTRY fr.ac6.mcu.ide 1 1 2019-07-18 11:18:37.085
-!MESSAGE Started RMI Server, listening on port 21112
-
-!ENTRY org.eclipse.launchbar.core 2 0 2019-07-18 11:19:14.963
-!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
-
-!ENTRY org.eclipse.launchbar.core 2 0 2019-07-18 11:19:14.975
-!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
-!SESSION 2019-07-23 07:06:13.896 -----------------------------------------------
-eclipse.buildId=4.6.3.M20170301-0400
-java.version=1.8.0_151
-java.vendor=Oracle Corporation
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
-Framework arguments:  -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
-
-!ENTRY org.eclipse.egit.ui 2 0 2019-07-23 07:06:50.631
-!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
-user global configuration and to define the default location to store repositories: 'C:\Users\yulia'. If this is
-not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
-EGit might behave differently since they see different configuration options.
-This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
-
-!ENTRY fr.ac6.mcu.ide 1 1 2019-07-23 07:06:52.321
-!MESSAGE Started RMI Server, listening on port 21113
-
-!ENTRY org.eclipse.cdt.core 1 0 2019-07-23 07:07:40.626
-!MESSAGE Indexed 'Trial' (20 sources, 65 headers) in 6.13 sec: 5,001 declarations; 29,618 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
-
-!ENTRY org.eclipse.launchbar.core 2 0 2019-07-23 08:57:53.987
-!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
-
-!ENTRY org.eclipse.launchbar.core 2 0 2019-07-23 08:57:54.006
-!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
-!SESSION 2019-07-23 11:41:55.541 -----------------------------------------------
-eclipse.buildId=4.6.3.M20170301-0400
-java.version=1.8.0_151
-java.vendor=Oracle Corporation
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
-Framework arguments:  -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
-
-!ENTRY org.eclipse.core.resources 2 10035 2019-07-23 11:43:19.769
-!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
-
-!ENTRY org.eclipse.egit.ui 2 0 2019-07-23 11:43:32.121
-!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
-user global configuration and to define the default location to store repositories: 'C:\Users\yulia'. If this is
-not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
-EGit might behave differently since they see different configuration options.
-This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
-
-!ENTRY fr.ac6.mcu.ide 1 1 2019-07-23 11:43:35.097
-!MESSAGE Started RMI Server, listening on port 21112
-
-!ENTRY org.eclipse.launchbar.core 2 0 2019-07-23 11:43:44.993
-!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
-
-!ENTRY org.eclipse.launchbar.core 2 0 2019-07-23 11:43:45.005
-!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
-!SESSION 2019-07-24 10:45:45.999 -----------------------------------------------
-eclipse.buildId=4.6.3.M20170301-0400
-java.version=1.8.0_151
-java.vendor=Oracle Corporation
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
-Framework arguments:  -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
-
-!ENTRY org.eclipse.egit.ui 2 0 2019-07-24 10:48:11.164
-!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
-user global configuration and to define the default location to store repositories: 'C:\Users\yulia'. If this is
-not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
-EGit might behave differently since they see different configuration options.
-This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
-
-!ENTRY fr.ac6.mcu.ide 1 1 2019-07-24 10:48:17.638
-!MESSAGE Started RMI Server, listening on port 21112
-
-!ENTRY org.eclipse.launchbar.core 2 0 2019-07-24 10:53:22.684
-!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
-
-!ENTRY org.eclipse.launchbar.core 2 0 2019-07-24 10:53:22.693
-!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
-
-!ENTRY org.eclipse.equinox.p2.transport.ecf 4 1006 2019-07-24 11:29:10.789
-!MESSAGE Unknown Host: http://www.ac6-tools.com/Eclipse-updates/org.openstm32.system-workbench.update-site-v2/compositeContent.xml
-!STACK 0
-java.net.UnknownHostException: www.ac6-tools.com
-	at java.net.InetAddress.getAllByName0(InetAddress.java:1280)
-	at java.net.InetAddress.getAllByName(InetAddress.java:1192)
-	at java.net.InetAddress.getAllByName(InetAddress.java:1126)
-	at org.apache.http.impl.conn.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:44)
-	at org.apache.http.impl.conn.DefaultClientConnectionOperator.resolveHostname(DefaultClientConnectionOperator.java:259)
-	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:159)
-	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:304)
-	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:611)
-	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:446)
-	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:863)
-	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
-	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientFileSystemBrowser.runRequest(HttpClientFileSystemBrowser.java:263)
-	at org.eclipse.ecf.provider.filetransfer.browse.AbstractFileSystemBrowser$DirectoryJob.run(AbstractFileSystemBrowser.java:69)
-	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
-!SESSION 2019-07-25 05:58:23.856 -----------------------------------------------
-eclipse.buildId=4.6.3.M20170301-0400
-java.version=1.8.0_151
-java.vendor=Oracle Corporation
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
-Framework arguments:  -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
-
-!ENTRY org.eclipse.egit.ui 2 0 2019-07-25 06:00:24.613
-!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
-user global configuration and to define the default location to store repositories: 'C:\Users\yulia'. If this is
-not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
-EGit might behave differently since they see different configuration options.
-This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
-
-!ENTRY fr.ac6.mcu.ide 1 1 2019-07-25 06:00:26.735
-!MESSAGE Started RMI Server, listening on port 21112
-
-!ENTRY org.eclipse.core.resources 2 2 2019-07-25 06:10:48.992
-!MESSAGE Save operation warnings.
-!SUBENTRY 1 org.eclipse.core.resources 2 234 2019-07-25 06:10:48.992
-!MESSAGE The project description file (.project) for 'Orientation' was missing.  This file contains important information about the project.  A new project description file has been created, but some information about the project may have been lost.
-
-!ENTRY org.eclipse.launchbar.core 2 0 2019-07-25 07:41:41.070
-!MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
-
-!ENTRY org.eclipse.launchbar.core 2 0 2019-07-25 07:41:41.086
-!MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
-
-!ENTRY org.eclipse.cdt.ui 4 0 2019-07-25 10:47:26.003
-!MESSAGE Error in CDT UI during reconcile
-!STACK 1
-C Model Exception: C Model Status [Element main.c does not exist.]
-	at org.eclipse.cdt.internal.core.model.CElement.newNotPresentException(CElement.java:484)
-	at org.eclipse.cdt.internal.core.model.TranslationUnit.makeConsistent(TranslationUnit.java:573)
-	at org.eclipse.cdt.internal.core.model.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:62)
-	at org.eclipse.cdt.internal.core.model.CModelOperation.execute(CModelOperation.java:341)
-	at org.eclipse.cdt.internal.core.model.CModelOperation.run(CModelOperation.java:607)
-	at org.eclipse.cdt.internal.core.model.CModelOperation.runOperation(CModelOperation.java:635)
-	at org.eclipse.cdt.internal.core.model.WorkingCopy.reconcile(WorkingCopy.java:362)
-	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:78)
-	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:63)
-	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:87)
-	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
-	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:73)
-	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:349)
-	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
-!SUBENTRY 1 org.eclipse.cdt.core 4 969 2019-07-25 10:47:26.110
-!MESSAGE Element main.c does not exist.
-!SESSION 2019-07-26 05:47:09.608 -----------------------------------------------
-eclipse.buildId=4.6.3.M20170301-0400
-java.version=1.8.0_151
-java.vendor=Oracle Corporation
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
-Framework arguments:  -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
-
-!ENTRY org.eclipse.core.resources 2 10035 2019-07-26 05:49:00.374
-!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
-
-!ENTRY org.eclipse.egit.ui 2 0 2019-07-26 05:49:14.355
-!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
-user global configuration and to define the default location to store repositories: 'C:\Users\yulia'. If this is
-not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
-EGit might behave differently since they see different configuration options.
-This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
-
-!ENTRY fr.ac6.mcu.ide 1 1 2019-07-26 05:49:18.000
-!MESSAGE Started RMI Server, listening on port 21112
-
-!ENTRY org.eclipse.epp.logging.aeri.ide 2 17 2019-07-26 05:49:21.418
-!MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: Connect to dev.eclipse.org:443 [dev.eclipse.org/198.41.30.200] failed: Read timed out. ; version: 2.0.4.v20170307-1435
-!STACK 0
-org.apache.http.conn.ConnectTimeoutException: Connect to dev.eclipse.org:443 [dev.eclipse.org/198.41.30.200] failed: Read timed out
-	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:134)
-	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:319)
-	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:363)
-	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:219)
+java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at sun.security.ssl.InputRecord.readFully(InputRecord.java:465)
+	at sun.security.ssl.InputRecord.read(InputRecord.java:503)
+	at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:983)
+	at sun.security.ssl.SSLSocketImpl.readDataRecord(SSLSocketImpl.java:940)
+	at sun.security.ssl.AppInputStream.read(AppInputStream.java:105)
+	at org.apache.http.impl.io.SessionInputBufferImpl.streamRead(SessionInputBufferImpl.java:136)
+	at org.apache.http.impl.io.SessionInputBufferImpl.fillBuffer(SessionInputBufferImpl.java:152)
+	at org.apache.http.impl.io.SessionInputBufferImpl.readLine(SessionInputBufferImpl.java:270)
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:140)
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:57)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:260)
+	at org.apache.http.impl.DefaultBHttpClientConnection.receiveResponseHeader(DefaultBHttpClientConnection.java:161)
+	at org.apache.http.impl.conn.CPoolProxy.receiveResponseHeader(CPoolProxy.java:153)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:271)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:123)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:254)
 	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:195)
 	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:86)
 	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:108)
@@ -349,59 +53,12 @@ org.apache.http.conn.ConnectTimeoutException: Connect to dev.eclipse.org:443 [de
 	at com.google.common.util.concurrent.AbstractIdleService$2$1.run(AbstractIdleService.java:54)
 	at com.google.common.util.concurrent.Callables$3.run(Callables.java:93)
 	at java.lang.Thread.run(Thread.java:748)
-Caused by: java.net.SocketTimeoutException: Read timed out
-	at java.net.SocketInputStream.socketRead0(Native Method)
-	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
-	at java.net.SocketInputStream.read(SocketInputStream.java:171)
-	at java.net.SocketInputStream.read(SocketInputStream.java:141)
-	at sun.security.ssl.InputRecord.readFully(InputRecord.java:465)
-	at sun.security.ssl.InputRecord.read(InputRecord.java:503)
-	at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:983)
-	at sun.security.ssl.SSLSocketImpl.performInitialHandshake(SSLSocketImpl.java:1385)
-	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1413)
-	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1397)
-	at org.apache.http.conn.ssl.SSLConnectionSocketFactory.createLayeredSocket(SSLConnectionSocketFactory.java:290)
-	at org.apache.http.conn.ssl.SSLConnectionSocketFactory.connectSocket(SSLConnectionSocketFactory.java:259)
-	at org.apache.http.impl.conn.HttpClientConnectionOperator.connect(HttpClientConnectionOperator.java:125)
-	... 16 more
-!SESSION 2019-07-26 09:46:13.265 -----------------------------------------------
-eclipse.buildId=4.6.3.M20170301-0400
-java.version=1.8.0_151
-java.vendor=Oracle Corporation
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
-Framework arguments:  -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -pluginCustomization configuration/st_pref.ini -product org.eclipse.epp.package.cpp.product
 
-!ENTRY org.eclipse.core.resources 2 10035 2019-07-26 09:47:46.564
-!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+!ENTRY org.eclipse.cdt.core 1 0 2019-07-26 10:42:37.918
+!MESSAGE Indexed 'Trial' (21 sources, 87 headers) in 9.49 sec: 6,051 declarations; 31,349 references; 0 unresolved inclusions; 1 syntax errors; 0 unresolved names (0%)
 
-!ENTRY org.eclipse.egit.ui 2 0 2019-07-26 09:47:59.541
-!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
-user global configuration and to define the default location to store repositories: 'C:\Users\yulia'. If this is
-not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
-EGit might behave differently since they see different configuration options.
-This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
-
-!ENTRY fr.ac6.mcu.ide 1 1 2019-07-26 09:48:03.136
-!MESSAGE Started RMI Server, listening on port 21112
-
-!ENTRY org.eclipse.epp.logging.aeri.ide 2 17 2019-07-26 09:48:13.905
-!MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: Service Temporarily Unavailable. ; version: 2.0.4.v20170307-1435
-!STACK 0
-org.apache.http.client.HttpResponseException: Service Temporarily Unavailable
-	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.HttpResponses$ProgressMonitorResponseHandler.handleResponse(HttpResponses.java:71)
-	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.HttpResponses$ProgressMonitorResponseStringHandler.handleResponse(HttpResponses.java:93)
-	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.HttpResponses$ProgressMonitorResponseStringHandler.handleResponse(HttpResponses.java:1)
-	at org.apache.http.client.fluent.Response.handleResponse(Response.java:90)
-	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.HttpResponses.getContentWithProgress(HttpResponses.java:56)
-	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.IO.refreshConfiguration(IO.java:69)
-	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerConnection.startUp(ServerConnection.java:124)
-	at com.google.common.util.concurrent.AbstractIdleService$2$1.run(AbstractIdleService.java:54)
-	at com.google.common.util.concurrent.Callables$3.run(Callables.java:93)
-	at java.lang.Thread.run(Thread.java:748)
-
-!ENTRY org.eclipse.launchbar.core 2 0 2019-07-26 09:59:41.165
+!ENTRY org.eclipse.launchbar.core 2 0 2019-07-26 10:45:08.945
 !MESSAGE Enablement expression is missing for descriptor type org.eclipse.cdt.debug.core.coreBuildDescriptorType
 
-!ENTRY org.eclipse.launchbar.core 2 0 2019-07-26 09:59:41.177
+!ENTRY org.eclipse.launchbar.core 2 0 2019-07-26 10:45:08.976
 !MESSAGE Enablement expression is missing for config provider for org.eclipse.cdt.debug.core.coreBuildDescriptorType
