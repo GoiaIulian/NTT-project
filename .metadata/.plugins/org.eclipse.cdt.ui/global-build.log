@@ -1,4 +1,4 @@
-12:00:38 **** Incremental Build of configuration Debug for project Trial ****
+08:20:52 **** Incremental Build of configuration Debug for project Trial ****
 make all 
 Building file: ../Src/main.c
 Invoking: MCU GCC Compiler
@@ -16,8 +16,8 @@ Generating hex and Printing size information:
 arm-none-eabi-objcopy -O ihex "Trial.elf" "Trial.hex"
 arm-none-eabi-size "Trial.elf"
    text	   data	    bss	    dec	    hex	filename
-  22952	    492	   1796	  25240	   6298	Trial.elf
+  23200	    492	   1796	  25488	   6390	Trial.elf
  
-12:00:42 **** Incremental Build of configuration Debug for project Trial ****
+08:20:56 **** Incremental Build of configuration Debug for project Trial ****
 make all 
 make: Nothing to be done for 'all'.

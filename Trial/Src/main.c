@@ -121,6 +121,7 @@ static void MX_USART6_UART_Init(void);
 void debug(void);
 void testChip(void);
 void Init__vMPU_6050();
+IMU_tstImuData avg();
 
 
 IMU_tstImuData get_DATA();
@@ -181,18 +182,9 @@ int main(void)
   {
     /* USER CODE END WHILE */
 //	  debug();
-	  v = get_DATA();
-	  // procesare
-	  	v.AccXData = (v.AccXData) / 835.040;
-	  	v.AccYData = (v.AccYData) / 835.040;
-	  	v.AccZData = (v.AccZData) / 835.040;
-	  	v.GyroXData = (v.GyroXData) / 939.650784;
-	  	v.GyroYData = (v.GyroYData) / 939.650784;
-	  	v.GyroZData = (v.GyroZData) / 939.650784;
-	  	v.Temp 	    = ((v.Temp)/340) + 36.53; // [SI] = deg
-//	  printf("\r\n %f;%f;%f;%f;%f;%f;%f", v.AccXData,v.AccYData,v.AccZData,v.GyroXData,v.GyroYData,v.GyroZData,v.Temp);
-	  	MadgwickAHRSupdateIMU(v.GyroXData, v.GyroYData, v.GyroZData, v.AccXData, v.AccYData, v.AccZData);
-	  	printf("\r\n%f;%f;%f;%f",q0,q1,q2,q3);
+	  v = avg();
+	  MadgwickAHRSupdateIMU(v.GyroXData, v.GyroYData, v.GyroZData, v.AccXData, v.AccYData, v.AccZData);
+	  printf("\r\n%f;%f;%f;%f;%f",q0,q1,q2,q3,v.Temp);
 	  //HAL_UART_Transmit(&huart6, (uint8_t *)&buff, 10, 0xFFFF);
     /* USER CODE BEGIN 3 */
   }
@@ -246,7 +238,7 @@ void SystemClock_Config(void)
 
 //QUATERNION-------------------------------------------------------------------------------------------------------------
 
-#define sampleFreq	1000.0f		// sample frequency in Hz
+#define sampleFreq	20.0f		// sample frequency in Hz
 #define betaDef		0.1f		// 2 * proportional gain
 
 //---------------------------------------------------------------------------------------------------
@@ -390,6 +382,49 @@ void I2C__vWriteSingleByteBuffer(uint8_t I2c_add, uint8_t regAdress, uint8_t reg
   * @retval 0  : pBuffer1 identical to pBuffer2
   *         >0 : pBuffer1 differs from pBuffer2
   */
+
+IMU_tstImuData avg()
+{
+	IMU_tstImuData a;
+	IMU_tstImuData raw;
+
+	float AccXDataSum = 0;
+	float AccYDataSum = 0;
+	float AccZDataSum = 0;
+	float TempSum = 0;
+	float GyroXDataSum = 0;
+	float GyroYDataSum = 0;
+	float GyroZDataSum = 0;
+
+	for (int i = 0; i < 20; i++)
+	{
+		raw = get_DATA();
+		raw.AccXData  = (raw.AccXData) / 835.040;
+		raw.AccYData  = (raw.AccYData) / 835.040;
+		raw.AccZData  = (raw.AccZData) / 835.040;
+		raw.GyroXData = (raw.GyroXData) / 939.650784;
+		raw.GyroYData = (raw.GyroYData) / 939.650784;
+		raw.GyroZData = (raw.GyroZData) / 939.650784;
+		raw.Temp 	  = ((raw.Temp)/340) + 36.53;
+
+		AccXDataSum  += raw.AccXData;
+		AccYDataSum  += raw.AccYData;
+		AccZDataSum  += raw.AccZData;
+		TempSum      += raw.Temp;
+		GyroXDataSum += raw.GyroXData;
+		GyroYDataSum += raw.GyroYData;
+		GyroZDataSum += raw.GyroZData;
+	}
+	a.AccXData  = AccXDataSum / 20;
+	a.AccYData  = AccYDataSum / 20;
+	a.AccZData  = AccZDataSum / 20;
+	a.Temp      = TempSum / 20;
+	a.GyroXData = GyroXDataSum / 20;
+	a.GyroYData = GyroYDataSum / 20;
+	a.GyroZData = GyroZDataSum / 20;
+
+	return a;
+}
 
 void _delay_ms(int time)
 {
