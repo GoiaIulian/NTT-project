@@ -44,6 +44,9 @@
 #include "iicb_interface.h"
 #include "mpu6050.h"
 #include "MadgwickAHRS.h"
+#include "stm32f7xx_hal_tim.h"
+
+
 
 typedef struct ImuData {
 	float AccXData;
@@ -73,6 +76,7 @@ typedef struct ImuData {
 #define mpu_6050_config 26
 #define mpu_6050_gyro_config 27
 #define mpu_6050_accel_config 28
+#define ANY_DELAY_RQUIRED ((1000000 / 200U) - 1U)
 
 #ifdef __GNUC__
 /* With GCC, small printf (option LD Linker->Libraries->Small printf
@@ -105,6 +109,9 @@ typedef struct ImuData {
 
 UART_HandleTypeDef huart6;
 I2C_HandleTypeDef I2cHandle;
+TIM_HandleTypeDef htim6;
+uint8_t idx = 0;
+
 
 uint8_t u8asax[3];
 uint8_t aTxBuffer[]="";
@@ -121,6 +128,7 @@ static void MX_USART6_UART_Init(void);
 void debug(void);
 void testChip(void);
 void Init__vMPU_6050();
+void Config_vTask1();
 IMU_tstImuData avg();
 
 
@@ -170,7 +178,10 @@ int main(void)
 
   Config_I2C_Peripheral();
   Init__vMPU_6050();
-
+  //MX_TIM6_Init();
+  Config_vTask1();
+//  TIM6_DAC_IRQHandler();
+  HAL_TIM_OC_Start_IT(&htim6, TIM6);
   testChip();
   /* USER CODE BEGIN 2 */
 
@@ -382,6 +393,97 @@ void I2C__vWriteSingleByteBuffer(uint8_t I2c_add, uint8_t regAdress, uint8_t reg
   * @retval 0  : pBuffer1 identical to pBuffer2
   *         >0 : pBuffer1 differs from pBuffer2
   */
+
+
+
+
+//TIM6_DAC_IRQHandler
+//{
+//
+//}
+void Config_vTask1()
+{
+	RCC_ClkInitTypeDef    clkconfig;
+	uint32_t              uwTimclock, uwAPB1Prescaler = 0U;
+	uint32_t              uwPrescalerValue = 0U;
+	uint32_t              pFLatency;
+
+	/*Configure the TIM6 IRQ priority */
+	HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 0U ,1U);
+	/* Enable the TIM6 global Interrupt */
+	HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
+	/*enable clock source for timer 6 APB BUS*/
+	/* Enable TIM6 clock */
+	__HAL_RCC_TIM6_CLK_ENABLE();
+
+	/* Get clock configuration */
+	HAL_RCC_GetClockConfig(&clkconfig, &pFLatency);
+
+	/* Get APB1 prescaler */
+	uwAPB1Prescaler = clkconfig.APB1CLKDivider;
+
+	/* Compute TIM6 clock */
+	if (uwAPB1Prescaler == RCC_HCLK_DIV1)
+	{
+		uwTimclock = HAL_RCC_GetPCLK1Freq();
+	}
+	else
+	{
+		uwTimclock = 2*HAL_RCC_GetPCLK1Freq();
+	}
+
+	/* Compute the prescaler value to have TIM6 counter clock equal to 1MHz */
+	uwPrescalerValue = (uint32_t) ((uwTimclock / 1000000) - 1U);
+
+	/*Clear the update event flag*/
+	TIM6->SR = 0;
+	/* Set the required delay */
+	TIM6->PSC = uwPrescalerValue;
+	/*set the auto reload register*/
+	TIM6->ARR = ANY_DELAY_RQUIRED;
+	/*enable update interrupt*/
+	TIM6->DIER = TIM_DIER_UIE;
+	/*start the timer counter*/
+	TIM6->CR1 |= TIM_CR1_CEN;
+
+
+}
+
+void TIM6_DAC_IRQHandler(void)
+{
+	uint8_t i;
+
+
+
+	/*clear UIF flag*/
+	TIM6->SR &= ~TIM_SR_UIF;
+
+
+	static uint8_t oneSec = 0;
+
+	if (oneSec == 100)
+	{
+		/* Transmit one byte with 100 ms timeout */
+		//HAL_UART_Transmit(&huart2, &finalString[0], 20, 1000);
+		//HAL_UART_Transmit(&huart2, &newLine, 1, 100);
+		for (i = 0; i < idx;i++)
+		{
+			//printf("%c",(finalString[i]));
+		}
+
+		//printf("\r\n");
+
+		oneSec = 0;
+	}
+	else
+	{
+		oneSec++;
+	}
+
+
+
+
+}
 
 IMU_tstImuData avg()
 {

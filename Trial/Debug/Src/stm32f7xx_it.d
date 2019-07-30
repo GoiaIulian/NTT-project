@@ -24,6 +24,8 @@ Src/stm32f7xx_it.o: ../Src/stm32f7xx_it.c D:/Workspace/Trial/Inc/main.h \
  D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c_ex.h \
  D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h \
  D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h \
+ D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h \
+ D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
  D:/Workspace/Trial/Inc/stm32f7xx_it.h
@@ -79,6 +81,10 @@ D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_i2c_ex.h:
 D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr.h:
 
 D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pwr_ex.h:
+
+D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h:
+
+D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h:
 
 D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:
 

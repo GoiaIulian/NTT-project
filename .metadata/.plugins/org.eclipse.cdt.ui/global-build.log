@@ -1,9 +1,30 @@
-08:20:52 **** Incremental Build of configuration Debug for project Trial ****
+11:22:35 **** Incremental Build of configuration Debug for project Trial ****
 make all 
 Building file: ../Src/main.c
 Invoking: MCU GCC Compiler
 D:\Workspace\Trial\Debug
 arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+In file included from D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h:152:0,
+                 from D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h:46,
+                 from D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h:45,
+                 from D:/Workspace/Trial/Inc/stm32f7xx_hal_conf.h:244,
+                 from D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:46,
+                 from D:/Workspace/Trial/Inc/main.h:51,
+                 from ../Src/main.c:42:
+../Src/main.c: In function 'main':
+D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f769xx.h:1577:29: warning: passing argument 2 of 'HAL_TIM_OC_Start_IT' makes integer from pointer without a cast [-Wint-conversion]
+ #define TIM6                ((TIM_TypeDef *) TIM6_BASE)
+                             ^
+../Src/main.c:184:31: note: in expansion of macro 'TIM6'
+   HAL_TIM_OC_Start_IT(&htim6, TIM6);
+                               ^~~~
+In file included from D:/Workspace/Trial/Inc/stm32f7xx_hal_conf.h:380:0,
+                 from D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:46,
+                 from D:/Workspace/Trial/Inc/main.h:51,
+                 from ../Src/main.c:42:
+D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h:1300:19: note: expected 'uint32_t {aka long unsigned int}' but argument is of type 'TIM_TypeDef * {aka struct <anonymous> *}'
+ HAL_StatusTypeDef HAL_TIM_OC_Start_IT(TIM_HandleTypeDef *htim, uint32_t Channel);
+                   ^~~~~~~~~~~~~~~~~~~
 Finished building: ../Src/main.c
  
 Building target: Trial.elf
@@ -16,8 +37,14 @@ Generating hex and Printing size information:
 arm-none-eabi-objcopy -O ihex "Trial.elf" "Trial.hex"
 arm-none-eabi-size "Trial.elf"
    text	   data	    bss	    dec	    hex	filename
-  23200	    492	   1796	  25488	   6390	Trial.elf
+  23616	    492	   1868	  25976	   6578	Trial.elf
  
-08:20:56 **** Incremental Build of configuration Debug for project Trial ****
+11:22:41 **** Incremental Build of configuration Debug for project Trial ****
+make all 
+make: Nothing to be done for 'all'.
+11:43:13 **** Incremental Build of configuration Debug for project Trial ****
+make all 
+make: Nothing to be done for 'all'.
+11:43:30 **** Incremental Build of configuration Debug for project Trial ****
 make all 
 make: Nothing to be done for 'all'.

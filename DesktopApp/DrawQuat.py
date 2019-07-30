@@ -33,6 +33,7 @@ def main():
     pygame.init()
     width = 640
     height = 480
+    i = 0
 
     pygame.display.set_mode((width, height), video_flags)
     pygame.display.set_caption("Sensor Orientation")
@@ -62,9 +63,11 @@ def main():
     while 1:
         event = pygame.event.poll()
         if event.type == QUIT:
-            ser.close()
+            # ser.close()
             pygame.quit()
             quit()
+        if i > 14:
+            i = 0
 
         line = ser.readline()
         line = line.rstrip(b'\r\n')
