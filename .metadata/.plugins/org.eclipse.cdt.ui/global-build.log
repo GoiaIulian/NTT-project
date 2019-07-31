@@ -48,3 +48,125 @@ make: Nothing to be done for 'all'.
 11:43:30 **** Incremental Build of configuration Debug for project Trial ****
 make all 
 make: Nothing to be done for 'all'.
+08:18:24 **** Build of configuration Debug for project Trial ****
+make all 
+Building file: ../Src/main.c
+Invoking: MCU GCC Compiler
+D:\Workspace\Trial\Debug
+arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/main.d" -MT"Src/main.o" -o "Src/main.o" "../Src/main.c"
+In file included from D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f7xx.h:152:0,
+                 from D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h:46,
+                 from D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h:45,
+                 from D:/Workspace/Trial/Inc/stm32f7xx_hal_conf.h:244,
+                 from D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:46,
+                 from D:/Workspace/Trial/Inc/main.h:51,
+                 from ../Src/main.c:42:
+../Src/main.c: In function 'main':
+D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include/stm32f769xx.h:1577:29: warning: passing argument 2 of 'HAL_TIM_OC_Start_IT' makes integer from pointer without a cast [-Wint-conversion]
+ #define TIM6                ((TIM_TypeDef *) TIM6_BASE)
+                             ^
+../Src/main.c:184:31: note: in expansion of macro 'TIM6'
+   HAL_TIM_OC_Start_IT(&htim6, TIM6);
+                               ^~~~
+In file included from D:/Workspace/Trial/Inc/stm32f7xx_hal_conf.h:380:0,
+                 from D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:46,
+                 from D:/Workspace/Trial/Inc/main.h:51,
+                 from ../Src/main.c:42:
+D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim.h:1300:19: note: expected 'uint32_t {aka long unsigned int}' but argument is of type 'TIM_TypeDef * {aka struct <anonymous> *}'
+ HAL_StatusTypeDef HAL_TIM_OC_Start_IT(TIM_HandleTypeDef *htim, uint32_t Channel);
+                   ^~~~~~~~~~~~~~~~~~~
+Finished building: ../Src/main.c
+ 
+Building file: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c
+Invoking: MCU GCC Compiler
+D:\Workspace\Trial\Debug
+arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.d" -MT"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.o" -o "Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.o" "../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c"
+Finished building: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c
+ 
+Building file: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.c
+Invoking: MCU GCC Compiler
+D:\Workspace\Trial\Debug
+arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.d" -MT"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.o" -o "Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.o" "../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.c"
+Finished building: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_cortex.c
+ 
+Building file: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma.c
+Invoking: MCU GCC Compiler
+D:\Workspace\Trial\Debug
+arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma.d" -MT"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma.o" -o "Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma.o" "../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma.c"
+Finished building: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma.c
+ 
+Building file: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma_ex.c
+Invoking: MCU GCC Compiler
+D:\Workspace\Trial\Debug
+arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma_ex.d" -MT"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma_ex.o" -o "Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma_ex.o" "../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma_ex.c"
+Finished building: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_dma_ex.c
+ 
+Building file: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash.c
+Invoking: MCU GCC Compiler
+D:\Workspace\Trial\Debug
+arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash.d" -MT"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash.o" -o "Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash.o" "../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash.c"
+Finished building: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash.c
+ 
+Building file: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash_ex.c
+Invoking: MCU GCC Compiler
+D:\Workspace\Trial\Debug
+arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash_ex.d" -MT"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash_ex.o" -o "Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash_ex.o" "../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash_ex.c"
+Finished building: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_flash_ex.c
+ 
+Building file: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c
+Invoking: MCU GCC Compiler
+D:\Workspace\Trial\Debug
+arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.d" -MT"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.o" -o "Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.o" "../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c"
+Finished building: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c
+ 
+Building file: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c.c
+Invoking: MCU GCC Compiler
+D:\Workspace\Trial\Debug
+arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c.d" -MT"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c.o" -o "Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c.o" "../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c.c"
+Finished building: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c.c
+ 
+Building file: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c
+Invoking: MCU GCC Compiler
+D:\Workspace\Trial\Debug
+arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.d" -MT"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.o" -o "Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.o" "../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c"
+Finished building: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c
+ 
+Building file: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr.c
+Invoking: MCU GCC Compiler
+D:\Workspace\Trial\Debug
+arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr.d" -MT"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr.o" -o "Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr.o" "../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr.c"
+Finished building: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr.c
+ 
+Building file: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr_ex.c
+Invoking: MCU GCC Compiler
+D:\Workspace\Trial\Debug
+arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr_ex.d" -MT"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr_ex.o" -o "Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr_ex.o" "../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr_ex.c"
+Finished building: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_pwr_ex.c
+ 
+Building file: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc.c
+Invoking: MCU GCC Compiler
+D:\Workspace\Trial\Debug
+arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc.d" -MT"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc.o" -o "Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc.o" "../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc.c"
+Finished building: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc.c
+ 
+Building file: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc_ex.c
+Invoking: MCU GCC Compiler
+D:\Workspace\Trial\Debug
+arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F769xx -I"D:/Workspace/Trial/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc" -I"D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/Legacy" -I"D:/Workspace/Trial/Drivers/CMSIS/Device/ST/STM32F7xx/Include" -I"D:/Workspace/Trial/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc_ex.d" -MT"Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc_ex.o" -o "Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc_ex.o" "../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc_ex.c"
+Finished building: ../Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rcc_ex.c
+ 
+Building target: Trial.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m7 -mthumb -mfloat-abi=hard -mfpu=fpv5-d16 -specs=nosys.specs -specs=nano.specs -u_printf_float -T"../STM32F769NIHx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "Trial.elf" @"objects.list"   -lm
+Finished building target: Trial.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "Trial.elf" "Trial.hex"
+arm-none-eabi-size "Trial.elf"
+   text	   data	    bss	    dec	    hex	filename
+  23616	    492	   1868	  25976	   6578	Trial.elf
+ 
+08:19:22 **** Incremental Build of configuration Debug for project Trial ****
+make all 
+make: Nothing to be done for 'all'.

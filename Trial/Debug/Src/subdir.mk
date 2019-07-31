@@ -4,21 +4,30 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Src/error.c \
+../Src/iicb.c \
 ../Src/main.c \
+../Src/mpu6050.c \
 ../Src/stm32f7xx_hal_msp.c \
 ../Src/stm32f7xx_it.c \
 ../Src/syscalls.c \
 ../Src/system_stm32f7xx.c 
 
 OBJS += \
+./Src/error.o \
+./Src/iicb.o \
 ./Src/main.o \
+./Src/mpu6050.o \
 ./Src/stm32f7xx_hal_msp.o \
 ./Src/stm32f7xx_it.o \
 ./Src/syscalls.o \
 ./Src/system_stm32f7xx.o 
 
 C_DEPS += \
+./Src/error.d \
+./Src/iicb.d \
 ./Src/main.d \
+./Src/mpu6050.d \
 ./Src/stm32f7xx_hal_msp.d \
 ./Src/stm32f7xx_it.d \
 ./Src/syscalls.d \

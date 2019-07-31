@@ -28,9 +28,10 @@ Src/main.o: ../Src/main.c D:/Workspace/Trial/Inc/main.h \
  D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_tim_ex.h \
  D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h \
  D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
+ D:/Workspace/Trial/Inc/mpu6050.h \
  D:/Workspace/Trial/Inc/iicb_interface_ci.h \
- D:/Workspace/Trial/Inc/iicb_interface.h D:/Workspace/Trial/Inc/mpu6050.h \
- D:/Workspace/Trial/Inc/MadgwickAHRS.h
+ D:/Workspace/Trial/Inc/error.h D:/Workspace/Trial/Inc/iicb_interface.h \
+ D:/Workspace/Trial/Inc/error.h D:/Workspace/Trial/Inc/MadgwickAHRS.h
 
 D:/Workspace/Trial/Inc/main.h:
 
@@ -92,10 +93,14 @@ D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart.h:
 
 D:/Workspace/Trial/Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h:
 
+D:/Workspace/Trial/Inc/mpu6050.h:
+
 D:/Workspace/Trial/Inc/iicb_interface_ci.h:
+
+D:/Workspace/Trial/Inc/error.h:
 
 D:/Workspace/Trial/Inc/iicb_interface.h:
 
-D:/Workspace/Trial/Inc/mpu6050.h:
+D:/Workspace/Trial/Inc/error.h:
 
 D:/Workspace/Trial/Inc/MadgwickAHRS.h:

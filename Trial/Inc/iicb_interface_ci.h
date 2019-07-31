@@ -9,7 +9,11 @@
 #define IICB_INTERFACE_CI_H
 
 #include "stm32f7xx.h"
+#include "error.h"
 
+
+#define I2C_ADDRESS        0x68F
+#define I2Cx               I2C1
 
 /* User can use this section to tailor I2Cx/I2Cx instance used and associated resources ************************************************/
 /* Definition for I2Cx clock resources */

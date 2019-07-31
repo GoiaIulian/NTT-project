@@ -50,39 +50,15 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f7xx_hal.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
+void SystemClock_Config(void);
+void MX_GPIO_Init(void);
+void MX_USART6_UART_Init(void);
 
-/* USER CODE END Includes */
-
-/* Exported types ------------------------------------------------------------*/
-/* USER CODE BEGIN ET */
-
-/* USER CODE END ET */
-
-/* Exported constants --------------------------------------------------------*/
-/* USER CODE BEGIN EC */
-
-/* USER CODE END EC */
-
-/* Exported macro ------------------------------------------------------------*/
-/* USER CODE BEGIN EM */
-
-/* USER CODE END EM */
-
-/* Exported functions prototypes ---------------------------------------------*/
-void Error_Handler(void);
 
 void usart_gpio_init();
-
-/* USER CODE BEGIN EFP */
-
-/* USER CODE END EFP */
-
-/* Private defines -----------------------------------------------------------*/
-/* USER CODE BEGIN Private defines */
-
-/* USER CODE END Private defines */
+void Config_vTask1();
+void configure_led();
+void SetResetLed(uint8_t u8state);
 
 #ifdef __cplusplus
 }

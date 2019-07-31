@@ -40,43 +40,13 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "iicb_interface_ci.h"
-#include "iicb_interface.h"
 #include "mpu6050.h"
+#include "error.h"
 #include "MadgwickAHRS.h"
 #include "stm32f7xx_hal_tim.h"
 
+#define ANY_DELAY_RQUIRED 10000
 
-
-typedef struct ImuData {
-	float AccXData;
-	float AccYData;
-	float AccZData;
-	float Temp;
-	float GyroXData;
-	float GyroYData;
-	float GyroZData;
-	float MagXData;
-	float MagYData;
-	float MagZData;
-}IMU_tstImuData;
-
-#define I2C_ADDRESS        0x68F
-#define I2Cx                             I2C1
-
-
-
-#define mpu_6050_sig_path_rst 104
-
-
-
-#define mpu_6050_pwr_mgmnt_1 107 //0x6B
-#define mpu_6050_smprt_div 25
-
-#define mpu_6050_config 26
-#define mpu_6050_gyro_config 27
-#define mpu_6050_accel_config 28
-#define ANY_DELAY_RQUIRED ((1000000 / 200U) - 1U)
 
 #ifdef __GNUC__
 /* With GCC, small printf (option LD Linker->Libraries->Small printf
@@ -85,167 +55,44 @@ typedef struct ImuData {
 #else
 #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
 #endif /* __GNUC__ */
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
 
-/* USER CODE END Includes */
 
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
-
-/* Private variables ---------------------------------------------------------*/
 
 UART_HandleTypeDef huart6;
-I2C_HandleTypeDef I2cHandle;
 TIM_HandleTypeDef htim6;
+
+
 uint8_t idx = 0;
-
-
 uint8_t u8asax[3];
 uint8_t aTxBuffer[]="";
 uint8_t aRxBuffer[RXBUFFERSIZE];
 uint8_t bb[RXBUFFERSIZE];
-/* USER CODE BEGIN PV */
+IMU_tstImuData v;
 
-/* USER CODE END PV */
-
-/* Private function prototypes -----------------------------------------------*/
-void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
-static void MX_USART6_UART_Init(void);
-void debug(void);
-void testChip(void);
-void Init__vMPU_6050();
-void Config_vTask1();
-IMU_tstImuData avg();
+uint8_t on = 0;
 
 
-IMU_tstImuData get_DATA();
 
-
-/* USER CODE BEGIN PFP */
-
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
+//main-----------------------------------------------------------------------------------------------------------
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
-
-  /* USER CODE END 1 */
-
-  /* MCU Configuration--------------------------------------------------------*/
-
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
-
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
-
-  /* Configure the system clock */
   SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
-
-  /* Initialize all configured peripherals */
   MX_GPIO_Init();
   usart_gpio_init();
   MX_USART6_UART_Init();
-
-
   Config_I2C_Peripheral();
   Init__vMPU_6050();
-  //MX_TIM6_Init();
   Config_vTask1();
-//  TIM6_DAC_IRQHandler();
-  HAL_TIM_OC_Start_IT(&htim6, TIM6);
-  testChip();
-  /* USER CODE BEGIN 2 */
+  configure_led();
 
-  /* USER CODE END 2 */
-  IMU_tstImuData v;
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
+
   while (1)
   {
-    /* USER CODE END WHILE */
-//	  debug();
-	  v = avg();
-	  MadgwickAHRSupdateIMU(v.GyroXData, v.GyroYData, v.GyroZData, v.AccXData, v.AccYData, v.AccZData);
-	  printf("\r\n%f;%f;%f;%f;%f",q0,q1,q2,q3,v.Temp);
-	  //HAL_UART_Transmit(&huart6, (uint8_t *)&buff, 10, 0xFFFF);
-    /* USER CODE BEGIN 3 */
+
   }
-  /* USER CODE END 3 */
 }
 
-/**
-  * @brief System Clock Configuration
-  * @retval None
-  */
-void SystemClock_Config(void)
-{
-  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
-
-  /**Configure the main internal regulator output voltage 
-  */
-  __HAL_RCC_PWR_CLK_ENABLE();
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);
-  /**Initializes the CPU, AHB and APB busses clocks 
-  */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /**Initializes the CPU, AHB and APB busses clocks 
-  */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
-
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART6;
-  PeriphClkInitStruct.Usart6ClockSelection = RCC_USART6CLKSOURCE_PCLK2;
-  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
-}
 
 //QUATERNION-------------------------------------------------------------------------------------------------------------
 
@@ -262,6 +109,7 @@ volatile float q0 = 1.0f, q1 = 0.0f, q2 = 0.0f, q3 = 0.0f;	// quaternion of sens
 // Function declarations
 
 float invSqrt(float x);
+
 
 
 void MadgwickAHRSupdateIMU(float gx, float gy, float gz, float ax, float ay, float az) {
@@ -349,58 +197,9 @@ float invSqrt(float x) {
 
 //-----------------------------------------------------------------------------------------------------------------------
 
-void I2C__vWriteSingleByteBuffer(uint8_t I2c_add, uint8_t regAdress, uint8_t regValue)
-{
-	uint8_t aTxBuffer[2];
 
-	aTxBuffer[0] = regAdress;
-	aTxBuffer[1] = regValue;
+//Timer -----------------------------------------------------------------------------------------------------------------
 
-    /* -> Start the transmission process */
-    /* While the I2C in reception process, user can transmit data through "aTxBuffer" buffer */
-    while(HAL_I2C_Master_Transmit(&I2cHandle, (uint16_t)(I2c_add<<1),aTxBuffer, (uint16_t)2, (uint32_t)1000)!= HAL_OK)
-    {
-        /*
-         * Error_Handler() function is called when Timeout error occurs.
-         * When Acknowledge failure occurs (Slave don't acknowledge it's address)
-         * Master restarts communication
-         */
-
-        if (HAL_I2C_GetError(&I2cHandle) != HAL_I2C_ERROR_AF)
-        {
-            Error_Handler();
-        }
-
-    }
-
-    /* -> Wait for the end of the transfer */
-    /* Before starting a new communication transfer, you need to check the current
-     * state of the peripheral; if it’s busy you need to wait for the end of current
-     * transfer before starting a new one.
-     * For simplicity reasons, this example is just waiting till the end of the
-     * transfer, but application may perform other tasks while transfer operation
-     * is ongoing.
-     */
-      while (HAL_I2C_GetState(&I2cHandle) != HAL_I2C_STATE_READY)
-      {
-      }
-}
-
-/**
-  * @brief  Compares two buffers.
-  * @param  pBuffer1, pBuffer2: buffers to be compared.
-  * @param  BufferLength: buffer's length
-  * @retval 0  : pBuffer1 identical to pBuffer2
-  *         >0 : pBuffer1 differs from pBuffer2
-  */
-
-
-
-
-//TIM6_DAC_IRQHandler
-//{
-//
-//}
 void Config_vTask1()
 {
 	RCC_ClkInitTypeDef    clkconfig;
@@ -433,7 +232,7 @@ void Config_vTask1()
 	}
 
 	/* Compute the prescaler value to have TIM6 counter clock equal to 1MHz */
-	uwPrescalerValue = (uint32_t) ((uwTimclock / 1000000) - 1U);
+	uwPrescalerValue = (uint32_t) ((uwTimclock / 160000) - 1U);
 
 	/*Clear the update event flag*/
 	TIM6->SR = 0;
@@ -451,279 +250,27 @@ void Config_vTask1()
 
 void TIM6_DAC_IRQHandler(void)
 {
-	uint8_t i;
-
-
-
 	/*clear UIF flag*/
 	TIM6->SR &= ~TIM_SR_UIF;
 
-
-	static uint8_t oneSec = 0;
-
-	if (oneSec == 100)
+	if (on)
 	{
-		/* Transmit one byte with 100 ms timeout */
-		//HAL_UART_Transmit(&huart2, &finalString[0], 20, 1000);
-		//HAL_UART_Transmit(&huart2, &newLine, 1, 100);
-		for (i = 0; i < idx;i++)
-		{
-			//printf("%c",(finalString[i]));
-		}
-
-		//printf("\r\n");
-
-		oneSec = 0;
+		SetResetLed(on);
+		on = 0;
 	}
 	else
 	{
-		oneSec++;
+		SetResetLed(on);
+		on = 1;
 	}
 
-
-
-
-}
-
-IMU_tstImuData avg()
-{
-	IMU_tstImuData a;
-	IMU_tstImuData raw;
-
-	float AccXDataSum = 0;
-	float AccYDataSum = 0;
-	float AccZDataSum = 0;
-	float TempSum = 0;
-	float GyroXDataSum = 0;
-	float GyroYDataSum = 0;
-	float GyroZDataSum = 0;
-
-	for (int i = 0; i < 20; i++)
-	{
-		raw = get_DATA();
-		raw.AccXData  = (raw.AccXData) / 835.040;
-		raw.AccYData  = (raw.AccYData) / 835.040;
-		raw.AccZData  = (raw.AccZData) / 835.040;
-		raw.GyroXData = (raw.GyroXData) / 939.650784;
-		raw.GyroYData = (raw.GyroYData) / 939.650784;
-		raw.GyroZData = (raw.GyroZData) / 939.650784;
-		raw.Temp 	  = ((raw.Temp)/340) + 36.53;
-
-		AccXDataSum  += raw.AccXData;
-		AccYDataSum  += raw.AccYData;
-		AccZDataSum  += raw.AccZData;
-		TempSum      += raw.Temp;
-		GyroXDataSum += raw.GyroXData;
-		GyroYDataSum += raw.GyroYData;
-		GyroZDataSum += raw.GyroZData;
-	}
-	a.AccXData  = AccXDataSum / 20;
-	a.AccYData  = AccYDataSum / 20;
-	a.AccZData  = AccZDataSum / 20;
-	a.Temp      = TempSum / 20;
-	a.GyroXData = GyroXDataSum / 20;
-	a.GyroYData = GyroYDataSum / 20;
-	a.GyroZData = GyroZDataSum / 20;
-
-	return a;
-}
-
-void _delay_ms(int time)
-{
-	volatile int i,j;
-
-	for(i=0;i<time;i++)
-	{
-		j++;
-	}
-}
-
-void Init__vMPU_6050()
-{
-
-	unsigned char dest;
-	// reset chip 1 - exit sleep mode
-		//_delay_ms(1000);
-		I2C__vWriteSingleByteBuffer(mpu_6050_adress,mpu_6050_pwr_mgmnt_1,init_byte_107);
-		//_delay_ms(1000);
-		I2C__vReadBuffer(mpu_6050_adress,mpu_6050_pwr_mgmnt_1,&dest,1);
-
-		if (dest == init_byte_107)
-		{
-			printf("\r\n MPU chip 1 reseted successfully !\r\n");
-
-		}
-		else
-		{
-			printf("\r\n MPU chip 1 reset failed !\r\n");
-		}
-	//	_delay_ms(1000);
-	// reset chip 2
-		I2C__vWriteSingleByteBuffer(mpu_6050_adress, mpu_6050_sig_path_rst,init_byte_104);
-		//_delay_ms(1000);
-		I2C__vReadBuffer(mpu_6050_adress,mpu_6050_sig_path_rst,&dest,1);
-		if ((dest == 0x00))
-		{
-			// dupa ce se da reset valorile devin 0 din nou
-			printf("\r\n MPU chip 2 reseted successfully !\r\n");
-
-		}
-		else
-		{
-			printf("\r\n MPU chip 2 reset failed !\r\n");
-		}
-	//	_delay_ms(1000);
-	// sample divide rate  sample rate = ex 8kHz / (1+divide rate)  =  8000/110 = 72 Hz
-		I2C__vWriteSingleByteBuffer(mpu_6050_adress, mpu_6050_smprt_div,80);
-		_delay_ms(1000);
-		I2C__vReadBuffer(mpu_6050_adress,mpu_6050_smprt_div,&dest,1);
-		if ((dest == 80))
-		{
-
-			printf("\r\n MPU sample divide rate configured successfully !\r\n");
-		}
-		else
-		{
-			printf("\r\n MPU sample divide rate configuration failed !\r\n");
-		}
-		_delay_ms(1000);
-
-	// digital low pass filter
-		I2C__vWriteSingleByteBuffer(mpu_6050_adress, mpu_6050_config,0x00);
-		_delay_ms(1000);
-		I2C__vReadBuffer(mpu_6050_adress,mpu_6050_config,&dest,1);
-		if (dest == 0x00)
-		{
-			printf("\r\n MPU digital low pass filter configured successfully !\r\n");
-
-		}
-		else
-		{
-			printf("\r\n MPU digital low pass filter configuration failed !\r\n");
-		}
-		_delay_ms(1000);
-	// gyroscope config - gyro full scale = +/- 2000dps
-		I2C__vWriteSingleByteBuffer(mpu_6050_adress, mpu_6050_gyro_config,0b00011000);
-		_delay_ms(1000);
-		I2C__vReadBuffer(mpu_6050_adress,mpu_6050_gyro_config,&dest,1);
-		if (dest == 0b00011000)
-		{
-			printf("\r\n MPU gyroscope configured successfully !\r\n");
-
-		}
-		else
-		{
-			printf("\r\n MPU gyroscope configuration failed !\r\n");
-		}
-		_delay_ms(10);
-	// accelerometer config - accelerometer full scale = +/- 4g
-		I2C__vWriteSingleByteBuffer(mpu_6050_adress, mpu_6050_accel_config,0b00001000);
-		_delay_ms(1000);
-		I2C__vReadBuffer(mpu_6050_adress,mpu_6050_accel_config,&dest,1);
-		if (dest == 0b00001000)
-		{
-			printf("\r\n MPU accelerometer configured successfully !\r\n");
-
-		}
-		else
-		{
-			printf("\r\n MPU accelerometer configuration failed !\r\n");
-		}
-		_delay_ms(1000);
-
-	return ;
+	v = avg();
+	MadgwickAHRSupdateIMU(v.GyroXData, v.GyroYData, v.GyroZData, v.AccXData, v.AccYData, v.AccZData);
+	printf("\r\n%f;%f;%f;%f;%f",q0,q1,q2,q3,v.Temp);
 }
 
 
-
-
-
-
-void Config_I2C_Peripheral(void)
-{
-
-	/*##-1- Configure the I2C peripheral #######################################*/
-	I2cHandle.Instance             = I2Cx;
-
-	I2cHandle.Init.AddressingMode  = I2C_ADDRESSINGMODE_7BIT;
-
-	I2cHandle.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-
-	I2cHandle.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-	I2cHandle.Init.NoStretchMode   = I2C_NOSTRETCH_DISABLE;
-	I2cHandle.Init.OwnAddress1     = I2C_ADDRESS;
-	//I2cHandle.Init.OwnAddress2     = 0xFE;  // no use the dev board as slave
-
-	if(HAL_I2C_Init(&I2cHandle) != HAL_OK)
-	{
-	  /* Initialization Error */
-//	  Error_Handler("Error in I2C configuration !!!");
-	}
-
-}
-
-void I2C__vReadBuffer(uint8_t I2c_add, uint8_t RegAddr, uint8_t *aRxBuffer, uint8_t rxbuffsz)
-{
-    /* -> Lets ask for register's address */
-	I2C__vWriteBuffer(I2c_add, &RegAddr, 1);
-
-    /* -> Put I2C peripheral in reception process */
-    while(HAL_I2C_Master_Receive(&I2cHandle, (uint16_t)(I2c_add<<1), aRxBuffer, (uint16_t)rxbuffsz, (uint32_t)1000) != HAL_OK)
-    {
-        /* Error_Handler() function is called when Timeout error occurs.
-         * When Acknowledge failure occurs (Slave don't acknowledge it's address)
-         * Master restarts communication
-         */
-        if (HAL_I2C_GetError(&I2cHandle) != HAL_I2C_ERROR_AF)
-        {
-//            Error_Handler("Error in I2C read !!!");
-        }
-    }
-
-    /* -> Wait for the end of the transfer */
-    /* Before starting a new communication transfer, you need to check the current
-     * state of the peripheral; if it’s busy you need to wait for the end of current
-     * transfer before starting a new one.
-     * For simplicity reasons, this example is just waiting till the end of the
-     * transfer, but application may perform other tasks while transfer operation
-     * is ongoing.
-     **/
-    while (HAL_I2C_GetState(&I2cHandle) != HAL_I2C_STATE_READY)
-    {
-    }
-}
-
-void I2C__vWriteBuffer(uint8_t I2c_add, uint8_t *aTxBuffer, uint16_t txbuffsz)
-{
-    /* -> Start the transmission process */
-    /* While the I2C in reception process, user can transmit data through "aTxBuffer" buffer */
-    while(HAL_I2C_Master_Transmit(&I2cHandle, (uint16_t)(I2c_add<<1),(uint8_t*)aTxBuffer,txbuffsz,(uint32_t)1000)!= HAL_OK)
-    {
-        /*
-         * Error_Handler() function is called when Timeout error occurs.
-         * When Acknowledge failure occurs (Slave don't acknowledge it's address)
-         * Master restarts communication
-         */
-
-        if (HAL_I2C_GetError(&I2cHandle) != HAL_I2C_ERROR_AF)
-        {
-//            Error_Handler("Error in I2C write !!!");
-        }
-
-    }
-
-    /* -> Wait for the end of the transfer */
-    /* Before starting a new communication transfer, you need to check the current
-     * state of the peripheral; if it’s busy you need to wait for the end of current
-     * transfer before starting a new one.
-     * For simplicity reasons, this example is just waiting till the end of the
-     * transfer, but application may perform other tasks while transfer operation
-     * is ongoing.
-     */
-      while (HAL_I2C_GetState(&I2cHandle) != HAL_I2C_STATE_READY)
-      {
-      }
-}
+//Initialization ----------------------------------------------------------------------------------------------------------
 
 PUTCHAR_PROTOTYPE
 {
@@ -733,6 +280,50 @@ PUTCHAR_PROTOTYPE
 
   return ch;
 }
+
+
+void SystemClock_Config(void)
+{
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
+
+  /**Configure the main internal regulator output voltage
+  */
+  __HAL_RCC_PWR_CLK_ENABLE();
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);
+  /**Initializes the CPU, AHB and APB busses clocks
+  */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /**Initializes the CPU, AHB and APB busses clocks
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART6;
+  PeriphClkInitStruct.Usart6ClockSelection = RCC_USART6CLKSOURCE_PCLK2;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
+
 
 void usart_gpio_init()
 {
@@ -757,17 +348,8 @@ void usart_gpio_init()
   * @param None
   * @retval None
   */
-static void MX_USART6_UART_Init(void)
+void MX_USART6_UART_Init(void)
 {
-
-  /* USER CODE BEGIN USART6_Init 0 */
-
-//	__USART6_CLK_ENABLE();
-  /* USER CODE END USART6_Init 0 */
-
-  /* USER CODE BEGIN USART6_Init 1 */
-
-  /* USER CODE END USART6_Init 1 */
   huart6.Instance = USART6;
   huart6.Init.BaudRate = 9600;
   huart6.Init.WordLength = UART_WORDLENGTH_8B;
@@ -782,100 +364,6 @@ static void MX_USART6_UART_Init(void)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN USART6_Init 2 */
-
-  /* USER CODE END USART6_Init 2 */
-
-
-
-  	/* Peripheral interrupt init*/
-//  	HAL_NVIC_SetPriority(USART6_IRQn, 0, 0);
-//  	HAL_NVIC_EnableIRQ(USART6_IRQn);
-
-}
-
-void testChip(void)
-{
-	uint8_t u8destVal;
-
-	I2C__vReadBuffer(mpu_6050_adress,117,&u8destVal,1);
-
-	if (u8destVal == 0x68)
-	{
-		printf("\r\n----Who am I...--------[ OK ]");
-	}
-	else
-	{
-		printf("\r\n---nWho am I...[ NOK ]---");
-	}
-}
-
-IMU_tstImuData get_DATA(){
-
-
-	uint8_t AccelGyroRawData[14] = {0};
-	int16_t int16FinalImuRawData[7]={0};
-	IMU_tstImuData IMUstRawData;
-	I2C__vReadBuffer(mpu_6050_adress,mpu_6050_accel_x_h,AccelGyroRawData,14);
-
-		int16FinalImuRawData[0] = (AccelGyroRawData[0]<<8)|(AccelGyroRawData[1]); //acc_x
-		int16FinalImuRawData[1] = (AccelGyroRawData[2]<<8)|(AccelGyroRawData[3]); //acc_y
-		int16FinalImuRawData[2] = (AccelGyroRawData[4]<<8)|(AccelGyroRawData[5]); //acc_z
-		int16FinalImuRawData[3] = (AccelGyroRawData[6]<<8)|(AccelGyroRawData[7]); //temperature
-		int16FinalImuRawData[4] = (AccelGyroRawData[8]<<8)|(AccelGyroRawData[9]); //gyro_x
-		int16FinalImuRawData[5] = (AccelGyroRawData[10]<<8)|(AccelGyroRawData[11]); //gyro_y
-		int16FinalImuRawData[6] = (AccelGyroRawData[12]<<8)|(AccelGyroRawData[13]); //gyro_z
-
-
-		    IMUstRawData.AccXData  = (float)int16FinalImuRawData[0];
-			IMUstRawData.AccYData  = (float)int16FinalImuRawData[1];
-			IMUstRawData.AccZData  = (float)int16FinalImuRawData[2];
-			IMUstRawData.Temp      = (float)int16FinalImuRawData[3];
-			IMUstRawData.GyroXData = (float)int16FinalImuRawData[4];
-			IMUstRawData.GyroYData = (float)int16FinalImuRawData[5];
-			IMUstRawData.GyroZData = (float)int16FinalImuRawData[6];
-//			IMUstRawData.MagXData  = (float)int16FinalImuRawData[7];
-//			IMUstRawData.MagYData  = (float)int16FinalImuRawData[8];
-//			IMUstRawData.MagZData  = (float)int16FinalImuRawData[9];
-
-
-
-	return IMUstRawData;
-
-}
-
-
-void debug(void)
-{
-	printf("\r\n%f;%f;%f;%f",0.01, 0.00, 1.00, 0.00);
-	printf("\r\n%f;%f;%f;%f",0.02, 0.00, 1.00, 0.00);
-	printf("\r\n%f;%f;%f;%f",0.03, 0.00, 1.00, 0.00);
-	printf("\r\n%f;%f;%f;%f",0.04, 0.00, 1.00, 0.00);
-	printf("\r\n%f;%f;%f;%f",0.05, 0.00, 1.00, 0.00);
-	printf("\r\n%f;%f;%f;%f",0.06, 0.00, 1.00, 0.00);
-	printf("\r\n%f;%f;%f;%f",0.07, 0.00, 1.00, 0.00);
-	printf("\r\n%f;%f;%f;%f",0.08, 0.00, 1.00, 0.00);
-	printf("\r\n%f;%f;%f;%f",0.09, 0.00, 1.00, 0.00);
-
-	printf("\r\n%f;%f;%f;%f",0.01, 1.00, 0.00, 0.00);
-	printf("\r\n%f;%f;%f;%f",0.02, 1.00, 0.00, 0.00);
-	printf("\r\n%f;%f;%f;%f",0.03, 1.00, 0.00, 0.00);
-	printf("\r\n%f;%f;%f;%f",0.04, 1.00, 0.00, 0.00);
-	printf("\r\n%f;%f;%f;%f",0.05, 1.00, 0.00, 0.00);
-	printf("\r\n%f;%f;%f;%f",0.06, 1.00, 0.00, 0.00);
-	printf("\r\n%f;%f;%f;%f",0.07, 1.00, 0.00, 0.00);
-	printf("\r\n%f;%f;%f;%f",0.08, 1.00, 0.00, 0.00);
-	printf("\r\n%f;%f;%f;%f",0.09, 1.00, 0.00, 0.00);
-
-	printf("\r\n%f;%f;%f;%f",0.01, 0.00, 0.00, 1.00);
-	printf("\r\n%f;%f;%f;%f",0.02, 0.00, 0.00, 1.00);
-	printf("\r\n%f;%f;%f;%f",0.03, 0.00, 0.00, 1.00);
-	printf("\r\n%f;%f;%f;%f",0.04, 0.00, 0.00, 1.00);
-	printf("\r\n%f;%f;%f;%f",0.05, 0.00, 0.00, 1.00);
-	printf("\r\n%f;%f;%f;%f",0.06, 0.00, 0.00, 1.00);
-	printf("\r\n%f;%f;%f;%f",0.07, 0.00, 0.00, 1.00);
-	printf("\r\n%f;%f;%f;%f",0.08, 0.00, 0.00, 1.00);
-	printf("\r\n%f;%f;%f;%f",0.09, 0.00, 0.00, 1.00);
 }
 
 
@@ -884,47 +372,32 @@ void debug(void)
   * @param None
   * @retval None
   */
-static void MX_GPIO_Init(void)
+void MX_GPIO_Init(void)
 {
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOG_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
-
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+//  RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN;
 }
 
-/* USER CODE BEGIN 4 */
 
-/* USER CODE END 4 */
-
-/**
-  * @brief  This function is executed in case of error occurrence.
-  * @retval None
-  */
-void Error_Handler(void)
+void configure_led()
 {
-  /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
+	GPIOA->MODER |= GPIO_MODER_MODER12_0;
+	GPIOA->MODER &= ~(GPIO_MODER_MODER12_1);
 
-  /* USER CODE END Error_Handler_Debug */
+	GPIOA->OTYPER &= ~(GPIO_OTYPER_OT_12); // set the pin as push pull(reset state)
+	//SpeedR
+	GPIOA->OSPEEDR |= GPIO_OSPEEDER_OSPEEDR12; // set up the pin speed as high speed
+	//PupdR
+	GPIOA->PUPDR &= ~(GPIO_PUPDR_PUPDR12);
 }
 
-#ifdef  USE_FULL_ASSERT
-/**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
-void assert_failed(uint8_t *file, uint32_t line)
-{ 
-  /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
-     tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* USER CODE END 6 */
+void SetResetLed(uint8_t u8state)
+{
+	(u8state==1)?GPIOA->BSRR |= (GPIO_BSRR_BS_12):(GPIOA->BSRR |= GPIO_BSRR_BR_12);
 }
-#endif /* USE_FULL_ASSERT */
-
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
